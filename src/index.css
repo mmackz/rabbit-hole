@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "circular-std-book";
+  src: url(./fonts/CircularStd-Book.otf) format('opentype');
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background: #e7e7e7;
+  font-family: "circular-std-book";
+  margin: 1.25rem;
+}
+
+table {
+  margin-bottom: 0 !important;
+}
+
+thead {
+  background: linear-gradient(135deg, rgb(206, 159, 252) 0%, rgb(80, 68, 207) 100%);
+  color: #fff;
+}
+
+thead th {
+  border-style: none;
+  padding: 0.7rem 0.5rem !important;
+  font-size: 1.08rem;
+  font-weight: 400;
+}
+
+th, td {
+  padding: 0.4rem 0.35rem !important;
+}
+
+thead th:last-child {
+  width: 50px;
+}
+
+th:first-child {
+  padding-left: 1rem !important;
+}
+
+th:not(:first-child) {
+  text-align: center;
+}
+
+thead tr {
+  border-top: 0px;
+}
+
+.table-container {
+  max-width: 720px;
+  margin: 1rem auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 5px 5px 35px #8d8d8d;
+}
+
+.project-id {
+  font-size: 0.85rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.drop-item {
+  width: min-content;
+  white-space: nowrap;
+  position: absolute;
+  text-align: right;
+  top: 15px;
+  right: 35px;
+  z-index: 1;
+  background: #e7e7e7;
+  padding: 0.5rem;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+
+.copy-icon {
+  margin-left: 0.75rem;
+  text-align: right;
+}
+
+.tooltip-inner {
+  background: rgb(0, 24, 95);
+}
+
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+  border-top-color: rgb(0, 24, 95);
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 0.8rem;
+  }
+
+  thead th {
+    font-size: 1rem;
+  }
+}
