@@ -3,13 +3,21 @@
   src: url(./fonts/CircularStd-Book.otf) format('opentype');
 }
 
+:root {
+  --bg-dark: #2a2932;
+  --bg-light: #e7e7e7;
+  --bs-dark: #111010;
+  --bs-light: #8d8d8d;
+  --section-bg: #4f4f5a;
+}
+
 html {
   font-size: 16px;
 }
 
 body {
-  background: #e7e7e7;
-  font-family: "circular-std-book";
+  background: var(--bg-light);
+  font-family: "circular-std-book", sans-serif;
   margin: 1.25rem;
 }
 
@@ -49,12 +57,118 @@ thead tr {
   border-top: 0px;
 }
 
+.container {
+  max-width: 800px;
+}
+
+.section {
+  background: var(--section-bg);
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  padding: 2.5rem;
+  border-radius: 10px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.rh-logo {
+  width: 200px;
+  transform: translate(-5px, -5px);
+}
+
+.rh-logo > img {
+  width: 100%;
+}
+
+.logo-text {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: -1px;
+  color: #bbbbbe;
+  transform: translateX(-8px);
+}
+
+.form-title {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+
+}
+
+.input-container {
+  display: flex;
+}
+
+.input {
+  min-width: 336px;
+}
+
+.searchbar {
+  display: flex;
+}
+
+.searchbar:focus-within, .searchbar:hover {
+  box-shadow: 0 0 5px 0.051rem rgba(142, 253, 184, 0.418);
+  outline: 1px solid rgba(142, 253, 184, 0.418);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  transform: scaleY(.985);
+}
+
+.icon-container {
+  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  position: relative;
+}
+
+.input {
+  border: none;
+  border-radius: none;
+  padding: 0.95rem 0.25rem 0.95rem 0;
+  font-size: 0.88rem;
+}
+
+.input::placeholder {
+  color: rgba(195, 195, 207, 0.836);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.button {
+  border: none;
+  background: #71d9b1;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  padding: 0.8rem;
+}
+
+.button:hover {
+  box-shadow: 0 0 5px 0.051rem rgba(142, 253, 184, 0.418);
+}
+
 .table-container {
   max-width: 720px;
   margin: 1rem auto;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 5px 5px 35px #8d8d8d;
+  box-shadow: 5px 5px 35px var(--bs-light);
+  background: var(--bg-light);
 }
 
 .project-id {

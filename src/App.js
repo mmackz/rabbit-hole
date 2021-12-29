@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import Table from "./components/Table/Table";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { CircularProgress } from "@mui/material";
+import Form from "./components/Form/Form";
+import Stats from "./components/Stats/Stats";
+
 
 import mdata from "./data";
-
-const theme = createTheme({
-   palette: {
-     success: {
-        main: "#81fbb8"
-     }
-   },
- });
 
 function App() {
    const [address, setAddress] = useState("");
@@ -45,6 +38,7 @@ function App() {
          setError("");
          setAddress(address);
          setData(data.taskData);
+         setInput("");
       } else {
          setError("Not a valid Ethereum Address");
          setAddress("");
@@ -53,28 +47,12 @@ function App() {
    }
 
    return (
-      <form onSubmit={handleSubmit}>
-         <input
-            type="text"
-            value={input}
-            placeholder="address"
-            onChange={handleChange}
-            required
-         />
-         <button>Submit</button>
-         <ThemeProvider theme={theme}>
-            <CircularProgress
-               size="100px"
-               color="success"
-               sx={{color: "success.light"}}
-               thickness={5}
-               variant="determinate"
-               value={25}
-            />
-         </ThemeProvider>
+      <div className="container">
+         <Form props={{handleSubmit, handleChange, input}} />
+         <Stats props={{address, data}} />
          {error && <p>{error}</p>}
-         {data && <Table address={address} data={data} />}
-      </form>
+         {data && <Table data={data} />}
+      </div>
    );
 }
 

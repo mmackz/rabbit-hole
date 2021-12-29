@@ -4,12 +4,11 @@ import { faCaretDown, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "bootstrap";
 
 function Table(props) {
-   const { address, data: taskData } = props;
-   const { level, score, nextLevelScore, taskProgress: task } = taskData;
+   const task = props.data.taskProgress
 
    const [openDropdown, setOpenDropdown] = useState(null);
    const [activeTooltip, setActiveTooltip] = useState(null);
-   const [timeoutId, setTimeoutId] = useState(null)
+   const [timeoutId, setTimeoutId] = useState(null);
 
    useEffect(() => {
       function resetDropdown() {
@@ -33,7 +32,7 @@ function Table(props) {
             trigger: "manual"
          });
       });
-   });
+   }, [activeTooltip]);
 
    function copyId(index, event) {
       event.stopPropagation();
@@ -74,62 +73,53 @@ function Table(props) {
    const data = Object.entries(task).sort();
 
    return (
-      <>
-         <div className="stats-container">
-            <h1 className="stats-title">User Stats</h1>
-            <p>Address: {address}</p>
-            <p>Level: {level}</p>
-            <p>
-               Exp. {score}/{nextLevelScore}
-            </p>
-         </div>
-
-         <div className="table-container">
-            <table className="table table-striped table-bordered table-sm">
-               <thead>
-                  <tr>
-                     <th className="left" scope="col">Task</th>
-                     <th scope="col">Progress</th>
-                     <th scope="col">Redeemed</th>
-                     <th scope="col">ID</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {data.map((item, i) => (
-                     <tr
-                        className={item[1].isDisabled ? "table-danger" : ""}
-                        key={`task-${i}`}
+      <div className="table-container">
+         <table className="table table-striped table-bordered table-sm">
+            <thead>
+               <tr>
+                  <th className="left" scope="col">
+                     Task
+                  </th>
+                  <th scope="col">Progress</th>
+                  <th scope="col">Redeemed</th>
+                  <th scope="col">ID</th>
+               </tr>
+            </thead>
+            <tbody>
+               {data.map((item, i) => (
+                  <tr
+                     className={item[1].isDisabled ? "table-danger" : ""}
+                     key={`task-${i}`}
+                  >
+                     <th scope="row">{formatName(item[0])}</th>
+                     <td align="center">{item[1].progress ? "✅" : "❌"}</td>
+                     <td align="center">{item[1].redeemed ? "✅" : "❌"}</td>
+                     <td
+                        align="center"
+                        className="dropdown"
+                        onClick={(e) => dropdown(i, e)}
                      >
-                        <th scope="row">{formatName(item[0])}</th>
-                        <td align="center">{item[1].progress ? "✅" : "❌"}</td>
-                        <td align="center">{item[1].redeemed ? "✅" : "❌"}</td>
-                        <td
-                           align="center"
-                           className="dropdown"
-                           onClick={(e) => dropdown(i, e)}
-                        >
-                           <FontAwesomeIcon icon={faCaretDown} />
-                           <p className="d-none drop-item" id={`dropdown-${i}`}>
-                              <span
-                                 onClick={(e) => e.stopPropagation()}
-                                 id={`id-${i}`}
-                              >
-                                 {item[1].projectId}
-                              </span>
-                              <FontAwesomeIcon
-                                 icon={faCopy}
-                                 id={`projectId-${i}`}
-                                 className="copy-icon"
-                                 onClick={(e) => copyId(i, e)}
-                              />
-                           </p>
-                        </td>
-                     </tr>
-                  ))}
-               </tbody>
-            </table>
-         </div>
-      </>
+                        <FontAwesomeIcon icon={faCaretDown} />
+                        <p className="d-none drop-item" id={`dropdown-${i}`}>
+                           <span
+                              onClick={(e) => e.stopPropagation()}
+                              id={`id-${i}`}
+                           >
+                              {item[1].projectId}
+                           </span>
+                           <FontAwesomeIcon
+                              icon={faCopy}
+                              id={`projectId-${i}`}
+                              className="copy-icon"
+                              onClick={(e) => copyId(i, e)}
+                           />
+                        </p>
+                     </td>
+                  </tr>
+               ))}
+            </tbody>
+         </table>
+      </div>
    );
 }
 
