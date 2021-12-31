@@ -4,7 +4,8 @@ import { faCaretDown, faCopy } from "@fortawesome/free-solid-svg-icons";
 import { Tooltip } from "bootstrap";
 
 function Table(props) {
-   const task = props.data.taskProgress
+   const task = props.data.taskProgress;
+   const darktheme = props.theme;
 
    const [openDropdown, setOpenDropdown] = useState(null);
    const [activeTooltip, setActiveTooltip] = useState(null);
@@ -74,7 +75,7 @@ function Table(props) {
 
    return (
       <div className="table-container">
-         <table className="table table-striped table-bordered table-sm">
+         <table className={`table table-striped table-bordered table-sm ${darktheme && "table-dark"}`}>
             <thead>
                <tr>
                   <th className="left" scope="col">

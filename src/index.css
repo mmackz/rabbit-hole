@@ -16,6 +16,12 @@
    --table-border-color: #373b3e;
 }
 
+[data-theme="light"] {
+   --bg-color: #e0e0e0;
+   --bs-color: #8d8d8d;
+   --table-border-color: #dee2e6;
+}
+
 html {
    font-size: 18px;
 }
@@ -44,6 +50,7 @@ thead th {
    padding: 0.65rem 0.5rem !important;
    font-size: 1.07rem;
    font-weight: 400;
+   background: transparent !important;
 }
 
 th,
@@ -449,3 +456,28 @@ tbody {
       margin: 0;
    }
 }
+
+
+
+.switch-outer {
+   width: 34px;
+   height: 22px;
+   background: white;
+   border-radius: 12px;
+   position: relative;
+ }
+ 
+ .switch-inner {
+   background: black;
+   height: 19px;
+   width: 19px;
+   border-radius: 50%;
+   position: absolute;
+   top: 1.5px;
+   left: 2px;
+   transition: transform 0.2s linear;
+ }
+ 
+ .on {
+   transform: translateX(11.5px);
+ }

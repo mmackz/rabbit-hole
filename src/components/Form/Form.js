@@ -1,12 +1,19 @@
 import { useRef } from "react";
 import rhlogo from "../../../src/images/rabbitholelogo.png";
 
-function Form({ props }) {
+function Form({ props, theme }) {
    const { handleChange, handleSubmit, input } = props;
+   const { darktheme, setDarktheme } = theme;
    const inputRef = useRef()
 
    function focusInput() {
       inputRef.current.focus()
+   }
+
+   function toggleDarkmode() {
+      setDarktheme(state => !state);
+      const theme = darktheme ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
    }
 
    return (
@@ -17,6 +24,9 @@ function Form({ props }) {
                   <img src={rhlogo} alt="logo"></img>
                </div>
                <span className="logo-text">Task Viewer</span>
+               <div className="switch-outer" onClick={toggleDarkmode}>
+                  <div className={`switch-inner ${darktheme && "on"}`}></div>
+               </div>
             </div>
             <h1 className="form-title">Enter Users Address or ENS</h1>
             <div className="input-container">
