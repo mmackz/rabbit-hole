@@ -74,7 +74,7 @@ function Table(props) {
 
    return (
       <div className="table-container">
-         <table className="table table-striped table-sm">
+         <table className="table table-striped table-bordered table-sm">
             <thead>
                <tr>
                   <th className="left" scope="col">

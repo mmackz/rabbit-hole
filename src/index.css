@@ -4,11 +4,16 @@
 }
 
 :root {
-   --bg-dark: #2a2932;
-   --bg-light: #e0e0e0;
-   --bs-dark: #111010;
-   --bs-light: #8d8d8d;
+   --bg-color: #e0e0e0;
+   --bs-color: #8d8d8d;
    --section-bg: #4f4f5a;
+   --table-border-color: #dee2e6;
+}
+
+[data-theme="dark"] {
+   --bg-color: #2a2932;
+   --bs-color: #111010;
+   --table-border-color: #373b3e;
 }
 
 html {
@@ -16,7 +21,7 @@ html {
 }
 
 body {
-   background: var(--bg-light);
+   background: var(--bg-color);
    font-family: "circular-std-book", sans-serif;
    margin: 1.75rem;
 }
@@ -50,7 +55,7 @@ td {
 
 tbody th,
 tbody td:not(:last-child) {
-   border-right: 1px solid #dee2e6;
+   border-right: 1px solid var(--table-border-color);
 }
 
 tbody > tr:first-child th,
@@ -96,7 +101,7 @@ tbody {
    width: fit-content;
    padding: 1.75rem;
    border-radius: 10px;
-   box-shadow: 3px 3px 25px var(--bs-light);
+   box-shadow: 3px 3px 25px var(--bs-color);
 }
 
 .logo-container {
@@ -227,7 +232,7 @@ tbody {
 .stat-container {
    display: flex;
    align-items: center;
-   background: var(--bg-dark);
+   background: #2a2932;
    padding: 0.8rem 1rem;
    border-radius: 5px;
 }
@@ -267,8 +272,8 @@ tbody {
    margin: 1rem auto;
    border-radius: 10px;
    overflow: hidden;
-   box-shadow: 5px 5px 35px var(--bs-light);
-   background: var(--bg-light);
+   box-shadow: 5px 5px 35px var(--bs-color);
+   background: var(--bg-color);
 }
 
 .project-id {
