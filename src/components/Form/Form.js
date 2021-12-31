@@ -4,10 +4,10 @@ import rhlogo from "../../../src/images/rabbitholelogo.png";
 function Form({ props, theme }) {
    const { handleChange, handleSubmit, input } = props;
    const { darktheme, toggleDarkmode } = theme;
-   const inputRef = useRef()
+   const inputRef = useRef();
 
    function focusInput() {
-      inputRef.current.focus()
+      inputRef.current.focus();
    }
 
    return (
@@ -45,6 +45,8 @@ function Form({ props, theme }) {
                      onChange={handleChange}
                      ref={inputRef}
                      spellCheck="false"
+                     pattern="^0x[0-9a-fA-F]{40}|^\S*.eth$"
+                     minLength={7}
                      required
                   />
                </div>
