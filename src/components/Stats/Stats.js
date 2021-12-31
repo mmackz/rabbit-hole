@@ -15,6 +15,15 @@ function Stats({ props }) {
    const { level, score, nextLevelScore } = props.data;
 
    const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+   const ensDisplay = ens ? ens : "N/A";
+
+   // force small font-size for long .eth names
+   const ensStyle =
+      ensDisplay.length > 20
+         ? "xs-small"
+         : ensDisplay.length > 16
+         ? "small"
+         : "";
 
    return (
       <section className="stats-outer section">
@@ -25,9 +34,9 @@ function Stats({ props }) {
                   <img src={makeBlockie(address)} alt="blockie" />
                </div>
                <div className="stat-text">
-                  <p>
+                  <p className={ensStyle}>
                      <span className="small-text">ENS:</span>
-                     {ens ? ens : "N/A"}
+                     {ensDisplay}
                   </p>
                   <p className="short-address">
                      <span className="small-text">Address:</span>
