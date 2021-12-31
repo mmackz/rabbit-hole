@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { ethers } from "ethers";
+import reducer from "./helpers/reducers";
 import Table from "./components/Table/Table";
 import Form from "./components/Form/Form";
 import Stats from "./components/Stats/Stats";
@@ -7,26 +8,36 @@ import Stats from "./components/Stats/Stats";
 import mdata from "./data";
 
 function App() {
-   const [address, setAddress] = useState({
-      address: "0xA99F898530dF1514A566f1a6562D62809e99557D",
-      ens: "mattie.eth"
-   });
-   const [data, setData] = useState(mdata);
-   const [error, setError] = useState("");
-   const [input, setInput] = useState("");
-   const [provider, setProvider] = useState(null);
-   const [darktheme, setDarktheme] = useState(false);
+
+   const initialState = {
+      address: {
+         hex: "0xA99F898530dF1514A566f1a6562D62809e99557D",
+         ens: "mattie.eth"
+      },
+      data: mdata,
+      error: "",
+      input: "",
+      provider: null,
+      darktheme: false
+   };
+
+   const [state, dispatch] = useReducer(reducer, initialState);
+
+   const { address, data, error, input, provider, darktheme } = state;
 
    const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/app/task_progress?address=`;
 
    useEffect(() => {
       const url = `https://eth-mainnet.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_KEY}`;
-      setProvider(new ethers.providers.JsonRpcProvider(url));
+      dispatch({
+         type: "provider",
+         payload: new ethers.providers.JsonRpcProvider(url)
+      });
       document.documentElement.setAttribute("data-theme", "light");
    }, []);
 
    function handleChange({ target }) {
-      setInput(target.value);
+      dispatch({ type: "input", payload: target.value });
    }
 
    async function handleSubmit(event) {
@@ -40,22 +51,35 @@ function App() {
          const response = await fetch(TASK_API + address);
          const data = await response.json();
          const ens = await provider.lookupAddress(address);
-         setError("");
-         setAddress({ address, ens });
-         setData(data.taskData);
-         setInput("");
+         dispatch([
+            { type: "error", payload: "" },
+            { type: "address", payload: { hex: address, ens } },
+            { type: "data", payload: data.taskData },
+            { type: "input", payload: "" }
+         ])
       } else {
-         setError("Not a valid Ethereum Address");
-         setAddress("");
-         setData("");
+         dispatch([
+            { type: "error", payload: "Not a valid Ethereum Address" },
+            { type: "address", payload: { hex: null, ens: null } },
+            { type: "data", payload: null }
+         ])
       }
+   }
+
+   function toggleDarkmode() {
+      dispatch({type: "darktheme"})
+      const theme = darktheme ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", theme);
    }
 
    return (
       <main className="main-container">
          <div className="top-section">
-            <Form props={{ handleSubmit, handleChange, input }} theme={{darktheme, setDarktheme}} />
-            <Stats props={{ address, data }} />
+            <Form
+               props={{ handleSubmit, handleChange, input }}
+               theme={{ darktheme, toggleDarkmode }}
+            />
+            {data && <Stats props={{ address, data }} />}
          </div>
 
          {error && <p>{error}</p>}

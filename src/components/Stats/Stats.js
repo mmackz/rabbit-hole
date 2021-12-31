@@ -11,10 +11,10 @@ const theme = createTheme({
 });
 
 function Stats({ props }) {
-   const { address, ens } = props.address;
+   const { hex, ens } = props.address;
    const { level, score, nextLevelScore } = props.data;
 
-   const shortAddress = `${address.slice(0, 6)}...${address.slice(-4)}`;
+   const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
    const ensDisplay = ens ? ens : "N/A";
 
    // force small font-size for long .eth names
@@ -31,7 +31,7 @@ function Stats({ props }) {
          <div className="stats-inner">
             <div className="stat-container">
                <div className="blockie">
-                  <img src={makeBlockie(address)} alt="blockie" />
+                  <img src={makeBlockie(hex)} alt="blockie" />
                </div>
                <div className="stat-text">
                   <p className={ensStyle}>

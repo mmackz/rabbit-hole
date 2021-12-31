@@ -3,17 +3,11 @@ import rhlogo from "../../../src/images/rabbitholelogo.png";
 
 function Form({ props, theme }) {
    const { handleChange, handleSubmit, input } = props;
-   const { darktheme, setDarktheme } = theme;
+   const { darktheme, toggleDarkmode } = theme;
    const inputRef = useRef()
 
    function focusInput() {
       inputRef.current.focus()
-   }
-
-   function toggleDarkmode() {
-      setDarktheme(state => !state);
-      const theme = darktheme ? "light" : "dark";
-      document.documentElement.setAttribute("data-theme", theme);
    }
 
    return (
