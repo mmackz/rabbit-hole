@@ -8,7 +8,6 @@ import Stats from "./components/Stats/Stats";
 import mdata from "./data";
 
 function App() {
-
    const initialState = {
       address: {
          hex: "0xA99F898530dF1514A566f1a6562D62809e99557D",
@@ -43,31 +42,44 @@ function App() {
    async function handleSubmit(event) {
       event.preventDefault();
       const regex = /^0x[0-9a-fA-F]{40}|^\S*.eth$/;
-      const ethRegex = /^\S*.eth$/;
+      const ensRegex = /^\S*.eth$/;
       if (regex.test(input)) {
-         const address = ethRegex.test(input)
+         const address = ensRegex.test(input)
             ? await provider.resolveName(input)
             : input;
-         const response = await fetch(TASK_API + address);
-         const data = await response.json();
-         const ens = await provider.lookupAddress(address);
-         dispatch([
-            { type: "error", payload: "" },
-            { type: "address", payload: { hex: address, ens } },
-            { type: "data", payload: data.taskData },
-            { type: "input", payload: "" }
-         ])
-      } else {
-         dispatch([
-            { type: "error", payload: "Not a valid Ethereum Address" },
-            { type: "address", payload: { hex: null, ens: null } },
-            { type: "data", payload: null }
-         ])
+
+         if (!address) {
+            dispatch([
+               { type: "error", payload: "This ENS name is not registered or is not used as a primary address" },
+               { type: "input", payload: "" }
+            ]);
+            return;
+         }
+
+         try {
+            const response = await fetch(TASK_API + address);
+            console.log(response);
+            const data = await response.json();
+            const ens = await provider.lookupAddress(address);
+            dispatch([
+               { type: "error", payload: "" },
+               { type: "address", payload: { hex: address, ens } },
+               { type: "data", payload: data.taskData },
+               { type: "input", payload: "" }
+            ]);
+         } catch (error) {
+            console.log(error);
+            dispatch([
+               { type: "error", payload: JSON.stringify(error) },
+               { type: "address", payload: { hex: null, ens: null } },
+               { type: "data", payload: null }
+            ]);
+         }
       }
    }
 
    function toggleDarkmode() {
-      dispatch({type: "darktheme"})
+      dispatch({ type: "darktheme" });
       const theme = darktheme ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", theme);
    }
