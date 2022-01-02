@@ -29,7 +29,6 @@ html {
 body {
    background: var(--bg-color);
    font-family: "circular-std-book", sans-serif;
-   margin: 1.75rem;
    display: grid;
    place-items: center;
    height: 100vh;
@@ -96,7 +95,7 @@ tbody {
 
 .main-container {
    max-width: max-content;
-   margin: 0 auto;
+   margin: 1.75rem auto;
 }
 
 .top-section {
@@ -143,6 +142,7 @@ tbody {
    font-size: 1.5rem;
    color: #fff;
    margin-bottom: 1.15rem;
+   letter-spacing: -0.25px;
 }
 
 .input-container {
@@ -155,6 +155,7 @@ tbody {
 
 .searchbar {
    display: flex;
+   width: 100%;
 }
 
 .searchbar:focus-within,
@@ -163,11 +164,11 @@ tbody {
    outline: 1px solid rgba(142, 253, 184, 0.418);
    border-top-left-radius: 4px;
    border-bottom-left-radius: 4px;
-   transform: scaleY(0.985);
+   transform: scaleY(0.98);
 }
 
 .icon-container {
-   width: 2.5rem;
+   width: 2.35rem;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -175,12 +176,13 @@ tbody {
    border-top-left-radius: 4px;
    border-bottom-left-radius: 4px;
    position: relative;
+   transform: translateX(0.5px);
 }
 
 .input {
    border: none;
    border-radius: none;
-   padding: 0.95rem 0.25rem 0.95rem 0;
+   padding: 0.95rem 0.25rem 0.95rem 0.05rem;
    font-size: 0.88rem;
 }
 
@@ -193,6 +195,7 @@ tbody {
 }
 
 .button {
+   box-sizing: content-box;
    border: none;
    background: #71d9b1;
    font-size: 0.75rem;
@@ -201,10 +204,15 @@ tbody {
    border-bottom-right-radius: 4px;
    color: #fff;
    padding: 0.8rem;
+   transform: translateX(-0.2px);
 }
 
 .button:hover {
    box-shadow: 0 0 5px 0.051rem rgba(142, 253, 184, 0.418);
+}
+
+.button:active {
+   background: #5ec59e;
 }
 
 .stats-outer {
@@ -233,7 +241,7 @@ tbody {
 
 .stats-title {
    font-size: 0.8rem;
-   margin: 0.25rem 0 0.45rem;
+   margin: 0 0 0.45rem;
    text-transform: uppercase;
    letter-spacing: -1px;
    font-weight: bold;
@@ -381,10 +389,6 @@ tbody {
       font-size: 16px;
    }
 
-   body {
-      margin: 1.5rem;
-   }
-
    .input {
       min-width: 336px;
    }
@@ -395,16 +399,12 @@ tbody {
 }
 
 @media (max-width: 850px) {
-   body {
-      margin: 1.25rem;
-   }
-
    .top-section {
       flex-direction: column;
       gap: 0.8rem;
    }
 
-   .section {
+   .section, .form, .input {
       width: 100%;
    }
 
@@ -413,12 +413,16 @@ tbody {
       justify-content: space-between;
    }
 
+   .stats-title {
+      margin-top: 0.2rem;
+   }
+
    .stat-container:first-of-type {
       flex-grow: 2;
    }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 550px) {
    html {
       font-size: 0.8rem;
    }
@@ -428,7 +432,27 @@ tbody {
    }
 
    .input {
-      min-width: 300px;
+      min-width: 290px;
+   }
+
+   .switch-outer {
+      height: 16px;
+      width: 30px;
+   }
+
+   .switch-inner {
+      height: 14px;
+      width: 14px;
+      transform: translateY(-0.4px);
+   }
+
+   .on {
+      transform: translate(90%, -0.4px);
+   }
+
+   .spinner {
+      height: 250px;
+      width: 250px;
    }
 }
 
@@ -439,6 +463,10 @@ tbody {
 
    thead th {
       font-size: 0.95rem;
+   }
+
+   .main-container {
+      margin: 0.65rem 0.5rem;
    }
 
    .blockie {
@@ -452,7 +480,7 @@ tbody {
    }
 
    .input {
-      min-width: 246px;
+      min-width: 236px;
    }
 
    .stats-outer {
@@ -480,7 +508,31 @@ tbody {
    }
 }
 
-@media (max-width: 390px) {
+@media (max-width: 420px) {
+   .input {
+      min-width: 226px;
+   }
+
+   .rh-logo {
+      width: 180px;
+   }
+
+   .switch-container {
+      margin-right: -0.4rem;
+   }
+
+   .spinner {
+      height: 220px;
+      width: 220px;
+   }
+
+   .stat-container > span {
+      height: 24px !important;
+      width: 24px !important;
+   }
+}
+
+@media (max-width: 392px) {
    html {
       font-size: 0.7rem;
    }
@@ -490,27 +542,96 @@ tbody {
    }
 
    .blockie {
-      display: none;
-   }
-
-   .icon-container {
-      transform: translateX(1px);
+      height: 16px;
+      width: 16px;
    }
 
    .input {
-      min-width: 210px;
+      min-width: 100%;
       padding: 0.9rem 0.225rem 0.9rem 0;
+      border-top-left-radius: 4px;
+      border-bottom-left-radius: 4px;
+      padding-left: 0.75rem;
    }
 
-   .section {
-      padding: 1.5rem 1.4rem;
+   .s-icon {
+      display: none;
+   }
+
+   .stat-container {
+      padding: 0.75rem 0.7rem;
+   }
+
+   .blockie {
+      margin-left: 1px;
    }
 
    .stat-container svg {
-      margin-top: -8px;
+      /* margin-left: -4px; */
+      margin-top: -6px;
    }
 
    .stat-text {
       margin: 0;
+   }
+
+   .switch-outer {
+      height: 14px;
+      width: 26px;
+   }
+
+   .switch-inner {
+      height: 12px;
+      width: 12px;
+      left: 1.5px;
+      top: 1.5px;
+   }
+
+   .on {
+      transform: translate(90%, -0.3px);
+   }
+
+   .spinner {
+      height: 200px;
+      width: 200px;
+   }
+}
+
+@media (max-width: 331px) {
+   html {
+      font-size: 0.675rem;
+   }
+
+   .rh-logo {
+      width: 175px;
+   }
+
+   .switch-container {
+      gap: 0.25rem;
+   }
+
+   .switch-outer {
+      height: 12px;
+      width: 22px;
+   }
+
+   .switch-inner {
+      height: 9px;
+      width: 9px;
+      left: 1.5px;
+      top: 2px;
+   }
+
+   .on {
+      transform: translate(98%, -0.3px);
+   }
+
+   .fa-sun, .fa-moon {
+      font-size: 8px;
+   }
+
+   .stat-container > span {
+      height: 22px !important;
+      width: 22px !important;
    }
 }

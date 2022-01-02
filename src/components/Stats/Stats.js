@@ -15,7 +15,7 @@ function Stats({ props }) {
    const { level, score, nextLevelScore, percentToNextLevel } = props.data;
 
    const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
-   const ensDisplay = ens ? ens : "N/A";
+   const ensDisplay = ens ? ens : <small>N/A</small>;
 
    // force small font-size for long .eth names
    const ensStyle =
