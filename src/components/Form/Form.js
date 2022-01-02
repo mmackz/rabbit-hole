@@ -1,7 +1,11 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import rhlogo from "../../../src/images/rabbitholelogo.png";
 
-function Form({ props, theme }) {
+import { Fade, Popper, Box } from "@mui/material";
+
+function Form({ props, theme, error }) {
    const { handleChange, handleSubmit, input } = props;
    const { darktheme, toggleDarkmode } = theme;
    const inputRef = useRef();
@@ -18,8 +22,12 @@ function Form({ props, theme }) {
                   <img src={rhlogo} alt="logo"></img>
                </div>
                <span className="logo-text">Task Viewer</span>
-               <div className="switch-outer" onClick={toggleDarkmode}>
-                  <div className={`switch-inner ${darktheme && "on"}`}></div>
+               <div className="switch-container">
+                  <FontAwesomeIcon icon={faSun} size="xs" color="white" />
+                  <div className="switch-outer" onClick={toggleDarkmode}>
+                     <div className={`switch-inner ${darktheme && "on"}`}></div>
+                  </div>
+                  <FontAwesomeIcon icon={faMoon} size="xs" color="white" />
                </div>
             </div>
             <h1 className="form-title">Enter Users Address or ENS</h1>
@@ -39,7 +47,9 @@ function Form({ props, theme }) {
                   </div>
                   <input
                      type="text"
+                     id="input"
                      value={input}
+                     autoComplete="off"
                      className="input"
                      placeholder="Search address or ENS name"
                      onChange={handleChange}
@@ -50,9 +60,39 @@ function Form({ props, theme }) {
                      required
                   />
                </div>
-               <button className="button">SEARCH</button>
+               <button type="submit" className="button">
+                  SEARCH
+               </button>
             </div>
          </form>
+         <Popper
+            open={!!error}
+            anchorEl={document.getElementById("input")}
+            transition
+         >
+            {({ TransitionProps }) => (
+               <Fade {...TransitionProps} timeout={350}>
+                  <Box
+                     sx={{
+                        border: 1,
+                        p: 1,
+                        mt: 1.5,
+                        ml: 4.5,
+                        fontSize: "0.75rem",
+                        bgcolor: "#f8d7da",
+                        color: "#842029",
+                        borderColor: "#f5c2c7",
+                        borderRadius: "3px",
+                        boxShadow: "1px 1px 10px black"
+                     }}
+                  >
+                     {error}
+                  </Box>
+               </Fade>
+            )}
+
+            {/* <div className="error">{error}</div> */}
+         </Popper>
       </section>
    );
 }

@@ -12,7 +12,7 @@ const theme = createTheme({
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
-   const { level, score, nextLevelScore } = props.data;
+   const { level, score, nextLevelScore, percentToNextLevel } = props.data;
 
    const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
    const ensDisplay = ens ? ens : "N/A";
@@ -52,7 +52,7 @@ function Stats({ props }) {
                      sx={{ color: "success.light" }}
                      thickness={6}
                      variant="determinate"
-                     value={75}
+                     value={percentToNextLevel * 100}
                   />
                </ThemeProvider>
                <div className="stat-text">

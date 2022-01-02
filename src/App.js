@@ -7,13 +7,15 @@ import Stats from "./components/Stats/Stats";
 
 import mdata from "./data";
 
+// address: {
+//    hex: "0xA99F898530dF1514A566f1a6562D62809e99557D",
+//    ens: "mattie.eth"
+// }
+
 function App() {
    const initialState = {
-      address: {
-         hex: "0xA99F898530dF1514A566f1a6562D62809e99557D",
-         ens: "mattie.eth"
-      },
-      data: mdata,
+      address: null,
+      data: null,
       error: "",
       input: "",
       provider: null,
@@ -50,15 +52,19 @@ function App() {
 
          if (!address) {
             dispatch([
-               { type: "error", payload: "This ENS name is not registered or is not used as a primary address" },
+               {
+                  type: "error",
+                  payload:
+                     "The ENS entered is not registered or is not used as a primary address"
+               },
                { type: "input", payload: "" }
             ]);
+            setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
             return;
          }
 
          try {
             const response = await fetch(TASK_API + address);
-            console.log(response);
             const data = await response.json();
             const ens = await provider.lookupAddress(address);
             dispatch([
@@ -68,12 +74,17 @@ function App() {
                { type: "input", payload: "" }
             ]);
          } catch (error) {
-            console.log(error);
+            const errorText =
+               Object.keys(error).length === 0
+                  ? "There was an error fetching the data, please try again... "
+                  : JSON.stringify(error);
+
             dispatch([
-               { type: "error", payload: JSON.stringify(error) },
+               { type: "error", payload: errorText },
                { type: "address", payload: { hex: null, ens: null } },
                { type: "data", payload: null }
             ]);
+            setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
          }
       }
    }
@@ -90,11 +101,11 @@ function App() {
             <Form
                props={{ handleSubmit, handleChange, input }}
                theme={{ darktheme, toggleDarkmode }}
+               error={error}
             />
             {data && <Stats props={{ address, data }} />}
          </div>
 
-         {error && <p>{error}</p>}
          {data && <Table data={data} theme={darktheme} />}
       </main>
    );
