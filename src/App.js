@@ -4,13 +4,7 @@ import reducer from "./helpers/reducers";
 import Table from "./components/Table/Table";
 import Form from "./components/Form/Form";
 import Stats from "./components/Stats/Stats";
-
-import mdata from "./data";
-
-// address: {
-//    hex: "0xA99F898530dF1514A566f1a6562D62809e99557D",
-//    ens: "mattie.eth"
-// }
+import loadingImg from "../src/images/magic.svg";
 
 function App() {
    const initialState = {
@@ -18,13 +12,14 @@ function App() {
       data: null,
       error: "",
       input: "",
+      loading: false,
       provider: null,
       darktheme: false
    };
 
    const [state, dispatch] = useReducer(reducer, initialState);
 
-   const { address, data, error, input, provider, darktheme } = state;
+   const { address, data, error, input, loading, provider, darktheme } = state;
 
    const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/app/task_progress?address=`;
 
@@ -43,6 +38,7 @@ function App() {
 
    async function handleSubmit(event) {
       event.preventDefault();
+      dispatch({ type: "loading" });
       const regex = /^0x[0-9a-fA-F]{40}|^\S*.eth$/;
       const ensRegex = /^\S*.eth$/;
       if (regex.test(input)) {
@@ -57,7 +53,8 @@ function App() {
                   payload:
                      "The ENS entered is not registered or is not used as a primary address"
                },
-               { type: "input", payload: "" }
+               { type: "input", payload: "" },
+               { type: "loading" }
             ]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
             return;
@@ -71,18 +68,19 @@ function App() {
                { type: "error", payload: "" },
                { type: "address", payload: { hex: address, ens } },
                { type: "data", payload: data.taskData },
-               { type: "input", payload: "" }
+               { type: "input", payload: "" },
+               { type: "loading" }
             ]);
          } catch (error) {
             const errorText =
                Object.keys(error).length === 0
                   ? "There was an error fetching the data, please try again... "
                   : JSON.stringify(error);
-
             dispatch([
                { type: "error", payload: errorText },
                { type: "address", payload: { hex: null, ens: null } },
-               { type: "data", payload: null }
+               { type: "data", payload: null },
+               { type: "loading" }
             ]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
          }
@@ -96,18 +94,20 @@ function App() {
    }
 
    return (
-      <main className="main-container">
-         <div className="top-section">
-            <Form
-               props={{ handleSubmit, handleChange, input }}
-               theme={{ darktheme, toggleDarkmode }}
-               error={error}
-            />
-            {data && <Stats props={{ address, data }} />}
-         </div>
+      <>
+         {loading && <img src={loadingImg} alt="loading spinner" />}
+         <main className={`main-container ${loading && "d-none"}`}>
+            <div className="top-section">
+               <Form
+                  props={{ handleSubmit, handleChange, input, error }}
+                  theme={{ darktheme, toggleDarkmode }}
+               />
+               {data && <Stats props={{ address, data }} />}
+            </div>
 
-         {data && <Table data={data} theme={darktheme} />}
-      </main>
+            {data && <Table data={data} theme={darktheme} />}
+         </main>
+      </>
    );
 }
 

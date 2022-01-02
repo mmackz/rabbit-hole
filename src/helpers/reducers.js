@@ -14,6 +14,8 @@ function reducer(state, action) {
          return { ...state, address: { hex: payload.hex, ens: payload.ens } };
       case "darktheme":
          return { ...state, darktheme: !state.darktheme };
+      case "loading":
+         return { ...state, loading: !state.loading };
       default:
          return { ...state, [type]: payload };
    }

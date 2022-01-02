@@ -5,8 +5,8 @@ import rhlogo from "../../../src/images/rabbitholelogo.png";
 
 import { Fade, Popper, Box } from "@mui/material";
 
-function Form({ props, theme, error }) {
-   const { handleChange, handleSubmit, input } = props;
+function Form({ props, theme }) {
+   const { handleChange, handleSubmit, input, error } = props;
    const { darktheme, toggleDarkmode } = theme;
    const inputRef = useRef();
 
