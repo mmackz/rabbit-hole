@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import rhlogo from "../../../src/images/rabbitholelogo.png";
@@ -90,8 +90,6 @@ function Form({ props, theme, error }) {
                   </Box>
                </Fade>
             )}
-
-            {/* <div className="error">{error}</div> */}
          </Popper>
       </section>
    );
