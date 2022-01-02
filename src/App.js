@@ -78,8 +78,7 @@ function App() {
                   : JSON.stringify(error);
             dispatch([
                { type: "error", payload: errorText },
-               { type: "address", payload: { hex: null, ens: null } },
-               { type: "data", payload: null },
+               { type: "input", payload: ""},
                { type: "loading" }
             ]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
