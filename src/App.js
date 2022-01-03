@@ -78,7 +78,7 @@ function App() {
                   : JSON.stringify(error);
             dispatch([
                { type: "error", payload: errorText },
-               { type: "input", payload: ""},
+               { type: "input", payload: "" },
                { type: "loading" }
             ]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
@@ -94,7 +94,9 @@ function App() {
 
    return (
       <>
-         {loading && <img className="spinner" src={loadingImg} alt="loading spinner" />}
+         {loading && (
+            <img className="spinner" src={loadingImg} alt="loading spinner" />
+         )}
          <main className={`main-container ${loading && "d-none"}`}>
             <div className="top-section">
                <Form

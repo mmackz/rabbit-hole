@@ -29,8 +29,9 @@ html {
 body {
    background: var(--bg-color);
    font-family: "circular-std-book", sans-serif;
-   display: grid;
-   place-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    height: 100vh;
 }
 
@@ -404,7 +405,9 @@ tbody {
       gap: 0.8rem;
    }
 
-   .section, .form, .input {
+   .section,
+   .form,
+   .input {
       width: 100%;
    }
 
@@ -626,7 +629,8 @@ tbody {
       transform: translate(98%, -0.3px);
    }
 
-   .fa-sun, .fa-moon {
+   .fa-sun,
+   .fa-moon {
       font-size: 8px;
    }
 
