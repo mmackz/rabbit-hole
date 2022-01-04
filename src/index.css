@@ -95,10 +95,6 @@ tbody {
    border-top: 0 !important;
 }
 
-tfoot {
-   height: 8px;
-}
-
 .main-container {
    max-width: max-content;
    margin: 1.75rem auto;
@@ -325,7 +321,7 @@ tfoot {
 }
 
 tr:last-of-type .drop-item {
-   top: 1px;
+   top: -6px;
 }
 
 .copy-icon {
