@@ -21,13 +21,10 @@ function App() {
 
    const { address, data, error, input, loading, provider, darktheme } = state;
 
-   const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/app/task_progress?address=`;
-
    useEffect(() => {
-      const url = `https://eth-mainnet.alchemyapi.io/v2/${process.env.REACT_APP_ALCHEMY_KEY}`;
       dispatch({
          type: "provider",
-         payload: new ethers.providers.JsonRpcProvider(url)
+         payload: new ethers.providers.getDefaultProvider()
       });
       document.documentElement.setAttribute("data-theme", "light");
    }, []);
@@ -61,7 +58,9 @@ function App() {
          }
 
          try {
-            const response = await fetch(TASK_API + address);
+            const response = await fetch(
+               `/.netlify/functions/taskapi?address=${address}`
+            );
             const data = await response.json();
             const ens = await provider.lookupAddress(address);
             dispatch([
@@ -78,7 +77,7 @@ function App() {
                   : JSON.stringify(error);
             dispatch([
                { type: "error", payload: errorText },
-               { type: "input", payload: ""},
+               { type: "input", payload: "" },
                { type: "loading" }
             ]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
@@ -94,7 +93,9 @@ function App() {
 
    return (
       <>
-         {loading && <img className="spinner" src={loadingImg} alt="loading spinner" />}
+         {loading && (
+            <img className="spinner" src={loadingImg} alt="loading spinner" />
+         )}
          <main className={`main-container ${loading && "d-none"}`}>
             <div className="top-section">
                <Form
