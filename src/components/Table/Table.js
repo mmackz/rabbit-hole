@@ -119,7 +119,6 @@ function Table(props) {
                   </tr>
                ))}
             </tbody>
-            <tfoot></tfoot>
          </table>
       </div>
    );
