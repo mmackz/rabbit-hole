@@ -29,8 +29,9 @@ html {
 body {
    background: var(--bg-color);
    font-family: "circular-std-book", sans-serif;
-   display: grid;
-   place-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
    height: 100%;
    min-height: 100vh;
 }
@@ -92,6 +93,10 @@ thead tr {
 tbody {
    /* override bootstrap style */
    border-top: 0 !important;
+}
+
+tfoot {
+   height: 8px;
 }
 
 .main-container {
@@ -319,6 +324,10 @@ tbody {
    border: 1px solid black;
 }
 
+tr:last-of-type .drop-item {
+   top: 1px;
+}
+
 .copy-icon {
    margin-left: 0.75rem;
    text-align: right;
@@ -405,7 +414,9 @@ tbody {
       gap: 0.8rem;
    }
 
-   .section, .form, .input {
+   .section,
+   .form,
+   .input {
       width: 100%;
    }
 
@@ -627,7 +638,8 @@ tbody {
       transform: translate(98%, -0.3px);
    }
 
-   .fa-sun, .fa-moon {
+   .fa-sun,
+   .fa-moon {
       font-size: 8px;
    }
 
