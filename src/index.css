@@ -95,6 +95,10 @@ tbody {
    border-top: 0 !important;
 }
 
+tfoot {
+   height: 8px;
+}
+
 .main-container {
    max-width: max-content;
    margin: 1.75rem auto;
@@ -318,6 +322,10 @@ tbody {
    padding: 0.5rem;
    border-radius: 3px;
    border: 1px solid black;
+}
+
+tr:last-of-type .drop-item {
+   top: 1px;
 }
 
 .copy-icon {
