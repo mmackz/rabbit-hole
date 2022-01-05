@@ -75,7 +75,11 @@ function Table(props) {
 
    return (
       <div className="table-container">
-         <table className={`table table-striped table-bordered table-sm ${darktheme && "table-dark"}`}>
+         <table
+            className={`table table-striped table-bordered table-sm ${
+               darktheme && "table-dark"
+            }`}
+         >
             <thead>
                <tr>
                   <th className="left" scope="col">
