@@ -21,6 +21,8 @@ function App() {
 
    const { address, data, error, input, loading, provider, darktheme } = state;
 
+   const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/app/task_progress?address=`;
+
    useEffect(() => {
       dispatch({
          type: "provider",
@@ -58,9 +60,7 @@ function App() {
          }
 
          try {
-            const response = await fetch(
-               `/.netlify/functions/taskapi?address=${address}`
-            );
+            const response = await fetch(TASK_API + address);
             const data = await response.json();
             const ens = await provider.lookupAddress(address);
             dispatch([
