@@ -21,7 +21,7 @@ function App() {
 
    const { address, data, error, input, loading, provider, darktheme } = state;
 
-   const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/app/task_progress?address=`;
+   const TASK_API = `https://${process.env.REACT_APP_TASK_URL}/task_progress?address=`;
 
    useEffect(() => {
       dispatch({
