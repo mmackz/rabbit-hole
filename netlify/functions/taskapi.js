@@ -8,9 +8,13 @@ exports.handler = async function (event) {
       );
       return {
          statusCode: 200,
+         // headers: {
+         //    'Access-Control-Allow-Origin': '*'
+         // },
          body: JSON.stringify(response.data)
       };
    } catch (err) {
+      console.log(err)
       return {
          statusCode: 404,
          body: err.toString()
