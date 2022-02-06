@@ -24,7 +24,7 @@ function App() {
    useEffect(() => {
       dispatch({
          type: "provider",
-         payload: new ethers.providers.getDefaultProvider()
+         payload: new ethers.providers.AlchemyProvider("homestead", process.env.REACT_APP_ALCHEMY_KEY)
       });
       document.documentElement.setAttribute("data-theme", "light");
    }, []);
