@@ -359,6 +359,7 @@ tr:last-of-type .drop-item {
    background: var(--table-border-color);
    border-radius: 12px;
    position: relative;
+   cursor: pointer;
 }
 
 .switch-inner {
