@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { ethers } from "ethers";
+import vhCheck from "vh-check";
 import reducer from "./helpers/reducers";
 import Table from "./components/Table/Table";
 import Form from "./components/Form/Form";
@@ -20,6 +21,8 @@ function App() {
    const [state, dispatch] = useReducer(reducer, initialState);
 
    const { address, data, error, input, loading, provider, darktheme } = state;
+
+   vhCheck();
 
    useEffect(() => {
       dispatch({
