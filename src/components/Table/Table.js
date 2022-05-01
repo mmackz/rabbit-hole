@@ -36,6 +36,7 @@ function Table(props) {
                         className="table-search"
                         type="text"
                         placeholder="Search"
+                        spellCheck="false"
                         value={searchTerm}
                         onChange={({ target }) => setSearchTerm(target.value)}
                      />
