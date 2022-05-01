@@ -33,7 +33,7 @@ body {
    justify-content: center;
    align-items: center;
    height: 100%;
-   min-height: 100vh;
+   min-height: calc(100vh - var(--vh-offset, 0px));
 }
 
 table {
@@ -80,6 +80,7 @@ thead th:last-child {
 
 th:first-child {
    padding-left: 1rem !important;
+   position: relative;
    display: flex;
    justify-content: space-between;
 }
@@ -295,6 +296,10 @@ tbody {
    font-size: 0.6rem;
 }
 
+.outer-table {
+   min-height: 31.25rem;
+}
+
 .table-container {
    max-width: 740px;
    margin: 1rem auto;
@@ -302,6 +307,31 @@ tbody {
    overflow: hidden;
    box-shadow: 5px 5px 35px var(--bs-color);
    background: var(--bg-color);
+}
+
+.table-search {
+   outline: none;
+   background: #c993ea5f;
+   color: white;
+   font-size: 0.85rem;
+   width: 10rem;
+   padding: 0.15rem 0.75rem;
+   border: 1px solid #76469dbf;
+   border-radius: 5px;
+   position: absolute;
+   left: 0;
+   bottom: 50%;
+   transform: translate(50%, 50%);
+   transition: background 0.2s ease-in-out;
+}
+
+.table-search::placeholder {
+   color: rgba(238, 238, 244, 0.799);
+}
+
+.table-search:hover,
+.table-search:focus {
+   background: #7038937f;
 }
 
 .project-id {
@@ -436,6 +466,10 @@ tr:last-of-type .drop-item {
    .stat-container:first-of-type {
       flex-grow: 2;
    }
+
+   .table-search {
+      width: 7rem;
+   }
 }
 
 @media (max-width: 550px) {
@@ -534,7 +568,7 @@ tr:last-of-type .drop-item {
    }
 
    .switch-container {
-      margin-right: -0.4rem;
+      transform: translateY(4px);
    }
 
    .spinner {
@@ -545,6 +579,23 @@ tr:last-of-type .drop-item {
    .stat-container > span {
       height: 24px !important;
       width: 24px !important;
+   }
+
+   .left span {
+      font-size: 0.5rem;
+      position: relative;
+      left: 52.5%;
+      bottom: 0.85rem;
+   }
+
+   .left .switch-outer {
+      width: 1.75rem;
+      height: 0.95rem;
+   }
+
+   .left .switch-inner {
+      height: 0.775rem;
+      width: 0.775rem;
    }
 }
 
