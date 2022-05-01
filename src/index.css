@@ -80,6 +80,8 @@ thead th:last-child {
 
 th:first-child {
    padding-left: 1rem !important;
+   display: flex;
+   justify-content: space-between;
 }
 
 th:not(:first-child) {
@@ -269,6 +271,11 @@ tbody {
 
 .short-address {
    font-size: 0.9rem;
+}
+
+.address-link {
+   color: #fff;
+   text-decoration: none;
 }
 
 .small-text {

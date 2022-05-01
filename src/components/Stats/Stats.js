@@ -40,7 +40,7 @@ function Stats({ props }) {
                   </p>
                   <p className="short-address">
                      <span className="small-text">Address:</span>
-                     {shortAddress}
+                     <a className="address-link" href={`https://etherscan.io/address/${hex}`}>{shortAddress}</a>
                   </p>
                </div>
             </div>
