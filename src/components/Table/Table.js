@@ -65,7 +65,7 @@ function Table(props) {
                      >
                         <th scope="row">{formatName(item[0])}</th>
                         <td align="center">{item[1].progress ? "✅" : "❌"}</td>
-                        <td align="center">{item[1].redeemed ? "✅" : "❌"}</td>
+                        <td align="center">{(item[1].progress && !legacyTasks.includes(item[0])) || item[1].redeemed ? "✅" : "❌"}</td>
                      </tr>
                   ))
                ) : (
