@@ -118,11 +118,11 @@ function App() {
                      error,
                      loading,
                      address,
-                     data
+                     data,
+                     provider,
+                     dispatch
                   }}
                   theme={{ darktheme, toggleDarkmode }}
-                  dispatch={{ dispatch }}
-                  provider={{ provider }}
                />
             }
          />

@@ -5,9 +5,18 @@ import Form from "../../components/Form/Form";
 import Stats from "../../components/Stats/Stats";
 import loadingImg from "../../images/magic.svg";
 
-function User(props) {
-   const { theme, dispatch, provider } = props;
-   const { handleChange, handleSubmit, input, loading, error, address, data } = props.props;
+function User({ props, theme }) {
+   const {
+      handleChange,
+      handleSubmit,
+      input,
+      loading,
+      error,
+      address,
+      data,
+      provider,
+      dispatch
+   } = props;
    const { darktheme, toggleDarkmode } = theme;
 
    const param = useParams();
