@@ -1,11 +1,11 @@
 import { useEffect, useReducer } from "react";
+import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import vhCheck from "vh-check";
 import reducer from "./helpers/reducers";
-import Table from "./components/Table/Table";
-import Form from "./components/Form/Form";
-import Stats from "./components/Stats/Stats";
-import loadingImg from "../src/images/magic.svg";
+import Home from "./components/Home/Home";
+import User from "./components/User/User";
 
 function App() {
    const initialState = {
@@ -22,12 +22,17 @@ function App() {
 
    const { address, data, error, input, loading, provider, darktheme } = state;
 
+   const navigate = useNavigate();
+
    vhCheck();
 
    useEffect(() => {
       dispatch({
          type: "provider",
-         payload: new ethers.providers.AlchemyProvider("homestead", process.env.REACT_APP_ALCHEMY_KEY)
+         payload: new ethers.providers.AlchemyProvider(
+            "homestead",
+            process.env.REACT_APP_ALCHEMY_KEY
+         )
       });
       document.documentElement.setAttribute("data-theme", "light");
    }, []);
@@ -42,9 +47,7 @@ function App() {
       const regex = /^0x[0-9a-fA-F]{40}|^\S*.eth$/;
       const ensRegex = /^\S*.eth$/;
       if (regex.test(input)) {
-         const address = ensRegex.test(input)
-            ? await provider.resolveName(input)
-            : input;
+         const address = ensRegex.test(input) ? await provider.resolveName(input) : input;
 
          if (!address) {
             dispatch([
@@ -61,9 +64,7 @@ function App() {
          }
 
          try {
-            const response = await fetch(
-               `/.netlify/functions/taskapi?address=${address}`
-            );
+            const response = await fetch(`/.netlify/functions/taskapi?address=${address}`);
             const data = await response.json();
             const ens = await provider.lookupAddress(address);
             dispatch([
@@ -73,6 +74,7 @@ function App() {
                { type: "input", payload: "" },
                { type: "loading" }
             ]);
+            navigate(`/${address}`);
          } catch (error) {
             const errorText =
                Object.keys(error).length === 0
@@ -95,22 +97,36 @@ function App() {
    }
 
    return (
-      <>
-         {loading && (
-            <img className="spinner" src={loadingImg} alt="loading spinner" />
-         )}
-         <main className={`main-container ${loading && "d-none"}`}>
-            <div className="top-section">
-               <Form
-                  props={{ handleSubmit, handleChange, input, error }}
+      <Routes>
+         <Route
+            path="/"
+            element={
+               <Home
+                  props={{ handleChange, handleSubmit, input, error, loading }}
                   theme={{ darktheme, toggleDarkmode }}
                />
-               {data && <Stats props={{ address, data }} />}
-            </div>
-
-            {data && <Table data={data} theme={darktheme} />}
-         </main>
-      </>
+            }
+         />
+         <Route
+            path="/:address"
+            element={
+               <User
+                  props={{
+                     handleChange,
+                     handleSubmit,
+                     input,
+                     error,
+                     loading,
+                     address,
+                     data
+                  }}
+                  theme={{ darktheme, toggleDarkmode }}
+                  dispatch={{ dispatch }}
+                  provider={{ provider }}
+               />
+            }
+         />
+      </Routes>
    );
 }
 
