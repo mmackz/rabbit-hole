@@ -31,10 +31,11 @@ function User({ props, theme }) {
             if (response.ok) {
                const data = await response.json();
                const ens = await provider.lookupAddress(param.address);
+               console.log(data);
                dispatch([
                   { type: "error", payload: "" },
                   { type: "address", payload: { hex: param.address, ens } },
-                  { type: "data", payload: data.taskData }
+                  { type: "data", payload: data }
                ]);
             } else if (response.status === 404) {
                dispatch({ type: "error", payload: "Invalid URL" });

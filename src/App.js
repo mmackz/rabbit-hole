@@ -70,7 +70,7 @@ function App() {
             dispatch([
                { type: "error", payload: "" },
                { type: "address", payload: { hex: address, ens } },
-               { type: "data", payload: data.taskData },
+               { type: "data", payload: data },
                { type: "input", payload: "" },
                { type: "loading" }
             ]);
