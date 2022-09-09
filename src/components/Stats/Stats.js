@@ -1,18 +1,8 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { CircularProgress } from "@mui/material";
 import makeBlockie from "ethereum-blockies-base64";
-
-const theme = createTheme({
-   palette: {
-      success: {
-         main: "#71d9b1"
-      }
-   }
-});
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
-   const { level, score, nextLevelScore, percentToNextLevel } = props.data;
+   // const { credentialsMinted, questsRedeemed } = props.data;
 
    const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
    const ensDisplay = ens ? ens : <small>N/A</small>;
@@ -46,22 +36,9 @@ function Stats({ props }) {
             </div>
 
             <div className="stat-container">
-               <ThemeProvider theme={theme}>
-                  <CircularProgress
-                     size="40px"
-                     sx={{ color: "success.light" }}
-                     thickness={6}
-                     variant="determinate"
-                     value={percentToNextLevel * 100}
-                  />
-               </ThemeProvider>
                <div className="stat-text">
                   <p>
-                     <span className="small-text">Level:</span> {level}
-                  </p>
-                  <p>
-                     <span className="small-text">Exp.</span> {score}/
-                     {nextLevelScore}
+                     <span className="small-text">Credentials Go Here</span>
                   </p>
                </div>
             </div>
