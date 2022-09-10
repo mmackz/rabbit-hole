@@ -1,4 +1,8 @@
 import makeBlockie from "ethereum-blockies-base64";
+import daos from "../../images/credentials/rhdaos.svg";
+import nfts from "../../images/credentials/rhnfts.svg";
+import defi from "../../images/credentials/rhdefi.svg";
+import brightId from "../../images/brightIdLogo.png";
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
@@ -9,11 +13,7 @@ function Stats({ props }) {
 
    // force small font-size for long .eth names
    const ensStyle =
-      ensDisplay.length > 20
-         ? "xs-small"
-         : ensDisplay.length > 16
-         ? "small"
-         : "";
+      ensDisplay.length > 20 ? "xs-small" : ensDisplay.length > 16 ? "small" : "";
 
    return (
       <section className="stats-outer section">
@@ -30,16 +30,31 @@ function Stats({ props }) {
                   </p>
                   <p className="short-address">
                      <span className="small-text">Address:</span>
-                     <a className="address-link" href={`https://etherscan.io/address/${hex}`}>{shortAddress}</a>
+                     <a
+                        className="address-link"
+                        href={`https://etherscan.io/address/${hex}`}
+                     >
+                        {shortAddress}
+                     </a>
                   </p>
                </div>
             </div>
 
-            <div className="stat-container">
-               <div className="stat-text">
-                  <p>
-                     <span className="small-text">Credentials Go Here</span>
-                  </p>
+            <div className="stat-container credentials">
+               <div className="credential">
+                  <p className="credential-text">NFT</p>
+                  <img src={nfts} alt="NFT credential" />
+               </div>
+               <div className="credential">
+                  <p className="credential-text">DAO</p>
+                  <img src={daos} alt="DAO credential" />
+               </div>
+               <div className="credential">
+                  <p className="credential-text">DEFI</p>
+                  <img src={defi} alt="DEFI credential" />
+               </div>
+               <div className="credential">
+                  <img src={brightId} alt="DEFI credential" />
                </div>
             </div>
          </div>
