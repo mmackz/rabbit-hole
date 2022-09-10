@@ -286,6 +286,7 @@ tbody {
 .credential {
    position: relative;
    box-shadow: 0px 0px 4px 0.025rem rgba(142, 253, 184, 0.418);
+   opacity: 0.06;
 }
 
 .credential img {
@@ -294,7 +295,7 @@ tbody {
    transition: opacity 0.3s ease-in-out;
 }
 
-.credential:hover img {
+.credential.earned:hover img {
    opacity: 0.3;
 }
 

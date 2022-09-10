@@ -2,7 +2,7 @@ import makeBlockie from "ethereum-blockies-base64";
 import daos from "../../images/credentials/rhdaos.svg";
 import nfts from "../../images/credentials/rhnfts.svg";
 import defi from "../../images/credentials/rhdefi.svg";
-import brightId from "../../images/brightIdLogo.png";
+import latestQuest from "../../images/emancipation.jpg";
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
@@ -57,8 +57,8 @@ function Stats({ props }) {
                      <img src={defi} alt="DEFI credential" />
                   </div>
                   <div className="credential">
-                     <p className="credential-text small-text">BRIGHT ID</p>
-                     <img src={brightId} alt="Bright ID" />
+                     <p className="credential-text">QUEST</p>
+                     <img src={latestQuest} alt="Quest NFT" />
                   </div>
                </div>
             </div>
