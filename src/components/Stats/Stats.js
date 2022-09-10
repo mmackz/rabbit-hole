@@ -1,12 +1,33 @@
+import { useEffect, useState } from "react";
 import makeBlockie from "ethereum-blockies-base64";
 import daos from "../../images/credentials/rhdaos.svg";
 import nfts from "../../images/credentials/rhnfts.svg";
 import defi from "../../images/credentials/rhdefi.svg";
-import latestQuest from "../../images/emancipation.jpg";
+import latestQuestImg from "../../images/emancipation.jpg";
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
-   // const { credentialsMinted, questsRedeemed } = props.data;
+
+   const [credentials, setCredentials] = useState({
+      daos: false,
+      defi: false,
+      nfts: false,
+      quest: false
+   });
+
+   useEffect(() => {
+      setCredentials({
+         daos: false,
+         defi: false,
+         nfts: false,
+         quest: false
+      });
+      (async () => {
+         const response = await fetch(`/.netlify/functions/credentials?address=${hex}`);
+         const data = await response.json();
+         setCredentials({ ...data });
+      })();
+   }, [hex]);
 
    const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
    const ensDisplay = ens ? ens : <small>N/A</small>;
@@ -44,21 +65,21 @@ function Stats({ props }) {
             <div className="stat-container credentials">
                <h1 className="stats-title">Credentials</h1>
                <div className="credential-container">
-                  <div className="credential">
-                     <p className="credential-text">NFT</p>
-                     <img src={nfts} alt="NFT credential" />
-                  </div>
-                  <div className="credential">
+                  <div className={`credential ${credentials.daos && "earned"}`}>
                      <p className="credential-text">DAO</p>
                      <img src={daos} alt="DAO credential" />
                   </div>
-                  <div className="credential">
+                  <div className={`credential ${credentials.defi && "earned"}`}>
                      <p className="credential-text">DEFI</p>
                      <img src={defi} alt="DEFI credential" />
                   </div>
-                  <div className="credential">
+                  <div className={`credential ${credentials.nfts && "earned"}`}>
+                     <p className="credential-text">NFT</p>
+                     <img src={nfts} alt="NFT credential" />
+                  </div>
+                  <div className={`credential ${credentials.quest && "earned"}`}>
                      <p className="credential-text">QUEST</p>
-                     <img src={latestQuest} alt="Quest NFT" />
+                     <img src={latestQuestImg} alt="Quest NFT" />
                   </div>
                </div>
             </div>
