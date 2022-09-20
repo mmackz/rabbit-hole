@@ -3,7 +3,7 @@ import makeBlockie from "ethereum-blockies-base64";
 import daos from "../../images/credentials/rhdaos.svg";
 import nfts from "../../images/credentials/rhnfts.svg";
 import defi from "../../images/credentials/rhdefi.svg";
-import latestQuestImg from "../../images/emancipation.jpg";
+import latestQuestImg from "../../images/hedgie.png";
 
 function Stats({ props }) {
    const { hex, ens } = props.address;
