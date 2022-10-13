@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Table from "../../components/Table/Table";
+import Tasks from "../Tasks/Tasks";
 import Form from "../../components/Form/Form";
 import Stats from "../../components/Stats/Stats";
 import loadingImg from "../../images/magic.svg";
@@ -67,7 +67,7 @@ function User({ props, theme }) {
                {data && <Stats props={{ address, data }} />}
             </div>
 
-            {data && <Table data={data} theme={darktheme} />}
+            {data && <Tasks data={data} theme={darktheme} />}
          </main>
       </>
    );
