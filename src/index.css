@@ -6,6 +6,7 @@
 :root {
    --bg-color: #e0e0e0;
    --bs-color: #8d8d8d;
+   --bg-dark: #2a2932;
    --section-bg: #4f4f5a;
    --switch-color: #dee2e6;
 }
@@ -206,7 +207,7 @@ body {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   background: #2a2932;
+   background: var(--bg-dark);
    padding: 0.85rem;
    border-radius: 5px;
 }
@@ -285,7 +286,65 @@ body {
 
 .card-task {
    display: flex;
-   gap: 2rem;;
+   align-items: center;
+   padding: 1rem;
+   border-radius: 10px;
+   gap: 2rem;
+   background: var(--bg-dark);
+}
+
+.card-task-name {
+   font-weight: bold;
+   margin: 0;
+}
+
+.card-logo {
+   height: 1.5rem;
+   width: 1.5rem;
+   border-radius: 50%;
+   background: #fff;
+}
+
+.task-status {
+   position: relative;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: black;
+   height: 1.75rem;
+   width: 7.5rem;
+   padding: 0 0.75rem 0 1.65rem;
+   border-radius: 1rem;
+   color: #f45757;
+}
+
+.task-status.complete {
+   color: #71d9b1;
+}
+
+.task-status-circle {
+   position: absolute;
+   left: 0.55rem;
+   top: 50%;
+   width: .775rem;
+   height: .775rem;
+   border: 2px #f45757 solid;
+   border-radius: 1rem;
+   background: #ffffff00;
+   transform: translateY(-50%);
+   transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.complete .task-status-circle {
+   border: 2px #71d9b1 solid;
+   background: #71d9b1;
+}
+
+.task-status-text {
+   position: relative;
+   font-size: 0.9rem;
+   margin: 0;
+   top: 0.75px;
 }
 
 .stat-text {
