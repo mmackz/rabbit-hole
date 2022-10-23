@@ -15,7 +15,7 @@ function App() {
       input: "",
       loading: false,
       provider: null,
-      darktheme: false
+      darktheme: true
    };
 
    const [state, dispatch] = useReducer(reducer, initialState);
@@ -34,7 +34,7 @@ function App() {
             process.env.REACT_APP_ALCHEMY_KEY
          )
       });
-      document.documentElement.setAttribute("data-theme", "light");
+      document.documentElement.setAttribute("data-theme", "dark");
    }, []);
 
    function handleChange({ target }) {
