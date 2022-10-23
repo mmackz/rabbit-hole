@@ -7,19 +7,19 @@
    --bg-color: #e0e0e0;
    --bs-color: #8d8d8d;
    --section-bg: #4f4f5a;
-   --table-border-color: #dee2e6;
+   --switch-color: #dee2e6;
 }
 
 [data-theme="dark"] {
    --bg-color: #2a2932;
    --bs-color: #111010;
-   --table-border-color: #373b3e;
+   --switch-color: #373b3e;
 }
 
 [data-theme="light"] {
    --bg-color: #e0e0e0;
    --bs-color: #8d8d8d;
-   --table-border-color: #dee2e6;
+   --switch-color: #dee2e6;
 }
 
 html {
@@ -259,6 +259,35 @@ body {
    margin: 0;
 }
 
+.credential-card {
+   background: var(--section-bg);
+   color: #fff;
+   padding: 1.5rem;
+   margin: 2rem;
+   border-radius: 10px;
+   display: flex;
+}
+
+.card-credential {
+   position: relative;
+}
+
+.card-credential > img:first-of-type {
+   width: 7rem;
+}
+
+.checkmark {
+   position: absolute;
+   height: 1.5rem;
+   right: 1rem;
+   top: 4.5rem;
+}
+
+.card-task {
+   display: flex;
+   gap: 2rem;;
+}
+
 .stat-text {
    margin-left: 0.7rem;
 }
@@ -294,40 +323,6 @@ body {
    font-size: 0.6rem;
 }
 
-.table-container {
-   max-width: 740px;
-   margin: 1rem auto;
-   border-radius: 10px;
-   overflow: hidden;
-   box-shadow: 5px 5px 35px var(--bs-color);
-   background: var(--bg-color);
-}
-
-.table-search {
-   outline: none;
-   background: #c993ea5f;
-   color: white;
-   font-size: 0.85rem;
-   width: 10rem;
-   padding: 0.15rem 0.75rem;
-   border: 1px solid #76469dbf;
-   border-radius: 5px;
-   position: absolute;
-   left: 0;
-   bottom: 50%;
-   transform: translate(50%, 50%);
-   transition: background 0.2s ease-in-out;
-}
-
-.table-search::placeholder {
-   color: rgba(238, 238, 244, 0.799);
-}
-
-.table-search:hover,
-.table-search:focus {
-   background: #7038937f;
-}
-
 /* darkmode switch styles */
 .switch-container {
    margin-left: auto;
@@ -340,7 +335,7 @@ body {
 .switch-outer {
    width: 32px;
    height: 18px;
-   background: var(--table-border-color);
+   background: var(--switch-color);
    border-radius: 12px;
    position: relative;
    cursor: pointer;
@@ -572,10 +567,6 @@ body {
 @media (max-width: 392px) {
    html {
       font-size: 0.7rem;
-   }
-
-   thead th {
-      font-size: 0.9rem;
    }
 
    .blockie {
