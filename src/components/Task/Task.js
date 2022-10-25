@@ -5,10 +5,10 @@ function Task(props) {
    return (
       <div className="card-task">
          <img className="card-logo" src={logo} alt="Gnosis Logo" />
-         <p className="card-task-name">{taskName}</p>
+         <p className={`card-task-name ${taskName.length > 17 && "long"}`}>{taskName}</p>
          <div className={`task-status ${progress && "complete"}`}>
             <div className="task-status-circle"></div>
-            <p className="task-status-text">{progress ? "Complete" : "Incomplete"}</p>
+            <p className={`task-status-text ${progress && "complete"}`}>{progress ? "Complete" : "Incomplete"}</p>
          </div>
       </div>
    );
