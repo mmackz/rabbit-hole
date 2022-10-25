@@ -9,8 +9,6 @@ import snapshot from "../images/projects/snapshot.png";
 import uniswap from "../images/projects/uniswap.png";
 import zora from "../images/projects/zora.png";
 
-
-
 function getTaskData(credential, taskdata) {
    switch (credential) {
       case "DAO":
