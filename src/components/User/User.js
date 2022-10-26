@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Tasks from "../Tasks/Tasks";
 import Form from "../../components/Form/Form";
@@ -53,6 +53,29 @@ function User({ props, theme }) {
       provider && onLoad();
    }, [param.address, provider, dispatch, navigate]);
 
+   const [credentials, setCredentials] = useState({
+      daos: false,
+      defi: false,
+      nfts: false,
+      l2: false,
+      quest: false
+   });
+
+   useEffect(() => {
+      setCredentials({
+         daos: false,
+         defi: false,
+         nfts: false,
+         l2: false,
+         quest: false
+      });
+      (async () => {
+         const response = await fetch(`/.netlify/functions/credentials?address=${address.hex}`);
+         const data = await response.json();
+         setCredentials({ ...data });
+      })();
+   }, [address]);
+
    return (
       <>
          {(!data || loading) && (
@@ -64,10 +87,10 @@ function User({ props, theme }) {
                   props={{ handleSubmit, handleChange, input, error }}
                   theme={{ darktheme, toggleDarkmode }}
                />
-               {data && <Stats props={{ address, data }} />}
+               {data && <Stats address={address} credentials={credentials} />}
             </div>
 
-            {data && <Tasks data={data} theme={darktheme} />}
+            {data && <Tasks credentials={credentials} data={data} theme={darktheme} />}
          </main>
       </>
    );

@@ -1,33 +1,12 @@
-import { useEffect, useState } from "react";
 import makeBlockie from "ethereum-blockies-base64";
 import daos from "../../images/credentials/rhdaos.svg";
 import nfts from "../../images/credentials/rhnfts.svg";
 import defi from "../../images/credentials/rhdefi.svg";
-import latestQuestImg from "../../images/hedgie.png";
+import l2 from "../../images/credentials/rhl2.svg";
 
-function Stats({ props }) {
+function Stats(props) {
    const { hex, ens } = props.address;
-
-   const [credentials, setCredentials] = useState({
-      daos: false,
-      defi: false,
-      nfts: false,
-      quest: false
-   });
-
-   useEffect(() => {
-      setCredentials({
-         daos: false,
-         defi: false,
-         nfts: false,
-         quest: false
-      });
-      (async () => {
-         const response = await fetch(`/.netlify/functions/credentials?address=${hex}`);
-         const data = await response.json();
-         setCredentials({ ...data });
-      })();
-   }, [hex]);
+   const { credentials } = props;
 
    const shortAddress = `${hex.slice(0, 6)}...${hex.slice(-4)}`;
    const ensDisplay = ens ? ens : <small>N/A</small>;
@@ -77,9 +56,9 @@ function Stats({ props }) {
                      <p className="credential-text">NFT</p>
                      <img src={nfts} alt="NFT credential" />
                   </div>
-                  <div className={`credential ${credentials.quest && "earned"}`}>
-                     <p className="credential-text">QUEST</p>
-                     <img src={latestQuestImg} alt="Quest NFT" />
+                  <div className={`credential ${credentials.l2 && "earned"}`}>
+                     <p className="credential-text">L2</p>
+                     <img src={l2} alt="L2 credential" />
                   </div>
                </div>
             </div>
