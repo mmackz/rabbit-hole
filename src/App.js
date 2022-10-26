@@ -9,7 +9,10 @@ import User from "./components/User/User";
 
 function App() {
    const initialState = {
-      address: null,
+      address: { 
+         hex: null, 
+         ens: null 
+      },
       data: null,
       error: "",
       input: "",

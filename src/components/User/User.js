@@ -62,19 +62,21 @@ function User({ props, theme }) {
    });
 
    useEffect(() => {
-      setCredentials({
-         daos: false,
-         defi: false,
-         nfts: false,
-         l2: false,
-         quest: false
-      });
-      (async () => {
-         const response = await fetch(`/.netlify/functions/credentials?address=${address.hex}`);
-         const data = await response.json();
-         setCredentials({ ...data });
-      })();
-   }, [address]);
+      if (address.hex !== null) {
+         setCredentials({
+            daos: false,
+            defi: false,
+            nfts: false,
+            l2: false,
+            quest: false
+         });
+         (async () => {
+            const response = await fetch(`/.netlify/functions/credentials?address=${address.hex}`);
+            const data = await response.json();
+            setCredentials({ ...data });
+         })();
+      }
+   }, [address.hex]);
 
    return (
       <>

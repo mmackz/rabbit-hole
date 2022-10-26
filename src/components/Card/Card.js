@@ -19,8 +19,8 @@ function Card(props) {
 
          <div>
             <div className="card-tasks">
-               {data.map((task) => (
-                  <Task data={task} />
+               {data.map((task, i) => (
+                  <Task key={task.taskName + i} data={task} />
                ))}
             </div>
          </div>
