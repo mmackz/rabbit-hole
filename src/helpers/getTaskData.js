@@ -1,4 +1,5 @@
 import aave from "../images/projects/aave.png";
+import brightid from "../images/projects/brightid.png";
 import gnosis from "../images/projects/gnosis.png";
 import hop from "../images/projects/hop.png";
 import lido from "../images/projects/lido.png";
@@ -13,6 +14,11 @@ function getTaskData(credential, taskdata) {
    switch (credential) {
       case "DAO":
          return [
+            {
+               taskName: "BrightID Verify",
+               progress: taskdata.find((task) => task[0] === "BRIGHTID_VERIFY")[1].progress,
+               logo: brightid
+            },
             {
                taskName: "Gnosis Safe",
                progress: taskdata.find((task) => task[0] === "GNOSIS_SAFE_OWNER")[1].progress,
@@ -37,7 +43,7 @@ function getTaskData(credential, taskdata) {
                logo: zora
             },
             {
-               taskName: "PartyBid Bid",
+               taskName: "PartyBid Join",
                progress: taskdata.find((task) => task[0] === "PARTY_CONTRIBUTION")[1].progress,
                logo: partybid
             },
@@ -55,12 +61,12 @@ function getTaskData(credential, taskdata) {
                logo: lido
             },
             {
-               taskName: "Lido Aave Lend",
+               taskName: "Aave Lido Lend",
                progress: taskdata.find((task) => task[0] === "LIDO_AAVE_LEND")[1].progress,
                logo: aave
             },
             {
-               taskName: "Lido USDC Borrow",
+               taskName: "Aave USDC Borrow",
                progress: taskdata.find((task) => task[0] === "AAVE_USDC_BORROW")[1].progress,
                logo: aave
             },
