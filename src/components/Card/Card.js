@@ -2,7 +2,7 @@ import Task from "../Task/Task";
 import greenCheck from "../../images/green-check.svg";
 
 function Card(props) {
-   const { credImg, data, title } = props;
+   const { credential, credImg, data, title } = props;
 
    return (
       <article className="credential-card">
@@ -13,7 +13,7 @@ function Card(props) {
             </div>
             <div className="credential-image">
                <img src={credImg} alt="DAOs" />
-               <img className="checkmark" src={greenCheck} alt="checkmark" />
+               <img className={`checkmark ${credential && "active"}`} src={greenCheck} alt="checkmark" />
             </div>
          </div>
 
