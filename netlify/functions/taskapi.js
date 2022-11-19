@@ -7,14 +7,13 @@ exports.handler = async function (event) {
          `${process.env.REACT_APP_TASK_URL}/task_progress?address=${address}`
       );
       return {
-         statusCode: 200,
+         statusCode: response.status,
          body: JSON.stringify(response.data.taskData)
       };
    } catch (err) {
-      console.log(err)
       return {
-         statusCode: 404,
-         body: err.toString()
+         statusCode: err.response.status,
+         body: JSON.stringify(err.response.data)
       };
    }
 };

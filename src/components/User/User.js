@@ -36,16 +36,18 @@ function User({ props, theme }) {
                   { type: "address", payload: { hex: param.address, ens } },
                   { type: "data", payload: data }
                ]);
-            } else if (response.status === 404) {
-               dispatch({ type: "error", payload: "Invalid URL" });
+            } else if (response.status !== 200) {
                navigate("/");
+               dispatch({ type: "error", payload: "Invalid URL" });
                setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
             }
          } catch (error) {
+            navigate("/");
             const errorText =
                Object.keys(error).length === 0
                   ? "There was an error fetching the data, please try again... "
                   : JSON.stringify(error);
+            console.error(errorText);
             dispatch([{ type: "error", payload: errorText }]);
             setTimeout(() => dispatch({ type: "error", payload: "" }), 6000);
          }

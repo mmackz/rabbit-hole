@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { ethers } from "ethers";
 import vhCheck from "vh-check";
 import reducer from "./helpers/reducers";
+import handleError from "./helpers/handleError";
 import Home from "./components/Home/Home";
 import User from "./components/User/User";
 
@@ -68,21 +69,28 @@ function App() {
 
          try {
             const response = await fetch(`/.netlify/functions/taskapi?address=${address}`);
-            const data = await response.json();
-            const ens = await provider.lookupAddress(address);
-            dispatch([
-               { type: "error", payload: "" },
-               { type: "address", payload: { hex: address, ens } },
-               { type: "data", payload: data },
-               { type: "input", payload: "" },
-               { type: "loading" }
-            ]);
-            navigate(`/${address}`);
+
+            if (response.ok) {
+               const data = await response.json();
+               const ens = await provider.lookupAddress(address);
+               dispatch([
+                  { type: "error", payload: "" },
+                  { type: "address", payload: { hex: address, ens } },
+                  { type: "data", payload: data },
+                  { type: "input", payload: "" },
+                  { type: "loading" }
+               ]);
+               navigate(`/${address}`);
+            } else {
+               throw new Error(handleError(await response.json()));
+            }
          } catch (error) {
+            navigate("/");
+            console.error(error.message);
             const errorText =
-               Object.keys(error).length === 0
-                  ? "There was an error fetching the data, please try again... "
-                  : JSON.stringify(error);
+            Object.keys(error).length === 0
+               ? error.message
+               : JSON.stringify(error);
             dispatch([
                { type: "error", payload: errorText },
                { type: "input", payload: "" },
